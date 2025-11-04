@@ -1,0 +1,6 @@
+framework module Pods_Pikachu_pokeSwift {
+  umbrella header "Pods-Pikachu-pokeSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
