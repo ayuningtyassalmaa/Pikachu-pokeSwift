@@ -21,7 +21,7 @@ protocol PokemonListViewModelType {
 
 protocol PokemonListViewModelInputs {
     func onViewDidLoad()
-    func CallApiPokemonList(id: String)
+    func CallApiPokemonList()
 }
 
 protocol PokemonListViewModelOutputs {
@@ -60,22 +60,23 @@ class PokemonListViewModel: BaseViewModel {
     
     
 }; extension PokemonListViewModel: PokemonListViewModelInputs {
+    
     func onViewDidLoad() {
-       CallApiPokemonList(id: "xy1-1")
+       CallApiPokemonList( )
     }
     
-    func CallApiPokemonList(id: String) {
+    func CallApiPokemonList() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.apiService.pokemonAPICards(id: id) { [weak self] successData in
+            self.apiService.pokemonAPICards { [weak self] successData in
                 guard let self = self else {return}
                 
                 if let data = successData {
                     print("sukses", successData)
-                    self.pokemonListData.accept([data])
-                    print("pokemonListData", pokemonListData.value)
+                    self.pokemonListData.accept(data)
                 }
             }
         }
+        
     }
     
     

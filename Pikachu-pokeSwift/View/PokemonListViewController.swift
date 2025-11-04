@@ -15,7 +15,7 @@ class PokemonListViewController: UIViewController {
     var viewModel: PokemonListViewModel = PokemonListViewModel()
     var model: PokemonListData?
     let disposeBag = DisposeBag()
-    var id: String?
+    var idPoke: String?
     
     @IBOutlet weak var pokemonSearchList: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -36,7 +36,7 @@ class PokemonListViewController: UIViewController {
     
     
     func bindModel() {
-        viewModel.ouput.pokemonList
+        viewModel.pokemonListData
             .asObservable()
             .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
@@ -44,27 +44,23 @@ class PokemonListViewController: UIViewController {
         })
         .disposed(by: disposeBag)
     }
-    
-    
-   
-
 
 };extension PokemonListViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return viewModel.pokemonListData.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let pokemonListData = viewModel.pokemonListData.value[indexPath.row]
-        let urlIMG = "https://images.pokemontcg.io/\(pokemonListData.images?.small).png"
-        
+    
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PokemonListCollectionCell", for: indexPath) as? PokemonListCollectionCell else {
             return UICollectionViewCell()
         }
         
         cell.setUpCell()
-        cell.setUpUI(img: urlIMG, pokeLbl: pokemonListData.name ?? "pokemon", iD: pokemonListData.id ?? "")
+        cell.setUpUI(img: pokemonListData.images?.large ?? "", pokeLbl: pokemonListData.name ?? "pokemon", iD: pokemonListData.id ?? "")
         return cell
     }
     
@@ -73,6 +69,10 @@ class PokemonListViewController: UIViewController {
         return CGSize(width: sizeCell, height: 50)
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedPokemon = viewModel.pokemonListData.value[indexPath.row]
+        let detailVC = PokemonDetailsViewController()
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 

@@ -1,0 +1,26 @@
+{
+  "data": [
+    {
+      "id": "xy1-1",
+      "name": "Venusaur-EX",
+      "supertype": "Pokémon",
+      "hp": "180",
+      "types": ["Grass"],
+      "images": {
+        "small": "https://images.pokemontcg.io/xy1/1.png",
+        "large": "https://images.pokemontcg.io/xy1/1_hires.png"
+      }
+    },
+    {
+      "id": "base1-4",
+      "name": "Charizard",
+      "supertype": "Pokémon",
+      "hp": "120",
+      "types": ["Fire"],
+      "images": {
+        "small": "https://images.pokemontcg.io/base1/4.png",
+        "large": "https://images.pokemontcg.io/base1/4_hires.png"
+      }
+    }
+  ]
+}

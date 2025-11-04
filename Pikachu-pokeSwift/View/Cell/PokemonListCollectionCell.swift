@@ -11,8 +11,6 @@ import SDWebImage
 class PokemonListCollectionCell: UICollectionViewCell {
     
     static let identifier = "PokemonListCollectionCell"
-    
-    
     private let verticalStackView: UIStackView = {
         let stckvw = UIStackView()
         stckvw.axis = .vertical
@@ -96,24 +94,20 @@ class PokemonListCollectionCell: UICollectionViewCell {
             verticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
             verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             
-            pokemonImageView.widthAnchor.constraint(equalToConstant: 10),
-            pokemonImageView.heightAnchor.constraint(equalToConstant: 10)
-            
+            pokemonImageView.widthAnchor.constraint(equalToConstant: 150),
+            pokemonImageView.heightAnchor.constraint(equalToConstant: 150)
         ])
-        
     }
     
     func setUpUI(img: String, pokeLbl: String,iD: String) {
-        
-        let urlIMG = "https://images.pokemontcg.io/\(iD)/\(img).png"
+        guard let url = URL(string: img) else {return}
         
         pokemonNamelabel.text = pokeLbl
         
-        if let url = URL(string: urlIMG) {
+        if !img.isEmpty{
             pokemonImageView.sd_setImage(with: url )
+        } else {
+            pokemonImageView.image = UIImage(systemName: "flag.pattern.checkered.circle.fill")
         }
     }
-    
-
-    
 }
