@@ -10,9 +10,7 @@ import UIKit
 
 struct PokemonDetailVCCoordinator {
     static func createPokemonPokemonDetailViewController(pokemonID: String = "xy1-1") -> PokemonDetailsViewController {
-        let controller = PokemonDetailsViewController(nibName: "PokemonDetailsViewController", bundle: nil)
-//        let nav = UINavigationController(rootViewController: controller)
-       
+        let controller = PokemonDetailsViewController(nibName: "PokemonDetailsViewController", bundle: nil)       
         controller.viewModel = PokemonDetailsViewModel.init(pokemonID: pokemonID)
         controller.coordinator = PokemonDetailVCCoordinator()
         return controller

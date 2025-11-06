@@ -12,9 +12,11 @@ class PokemonDetailsTableViewCell: UITableViewCell {
     
     static let identifier = "PokemonDetailsTableViewCell"
 
+    // Ui Components
     @IBOutlet weak var firstStackView: UIStackView!
     @IBOutlet weak var pokeLbl: UILabel!
     @IBOutlet weak var typePokeLbl: UILabel!
+    @IBOutlet weak var flavourTextLbl: UILabel!
     
     @IBOutlet weak var secondaryStackView: UIStackView!
     
@@ -39,7 +41,8 @@ class PokemonDetailsTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setupUI(img: String, pokeName: String, typePoke: String, ability: String, weakness: String, logo: String) {
+    // set up UI
+    func setupUI(img: String, pokeName: String, typePoke: String, ability: String, weakness: String, logo: String, rules: String) {
         guard let urlSymbol = URL(string: img) else {return}
         guard let urlLogo = URL(string: logo) else {return}
         
@@ -59,6 +62,7 @@ class PokemonDetailsTableViewCell: UITableViewCell {
         typePokeLbl.text = typePoke
         abilityPokeDesc.text = ability
         weaknessesPokeDesc.text = weakness
+        flavourTextLbl.text = rules
         
         container.backgroundColor = .white
         container.layer.cornerRadius = 10

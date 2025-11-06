@@ -12,6 +12,7 @@ class PokemonListCollectionCell: UICollectionViewCell {
     
     static let identifier = "PokemonListCollectionCell"
     
+    // Ui Components
     private let viewContainer: UIView = {
        let view = UIView()
         view.backgroundColor = .white
@@ -53,7 +54,7 @@ class PokemonListCollectionCell: UICollectionViewCell {
     
     private let pokemonIconDamage: UIImageView = {
         let img = UIImageView()
-        img.image = UIImage(named: "flag.pattern.checkered.circle.fill")
+        img.image = UIImage(named: "damagePoke")
         img.contentMode = .scaleAspectFit
         img.clipsToBounds = true
         img.translatesAutoresizingMaskIntoConstraints = false
@@ -81,7 +82,7 @@ class PokemonListCollectionCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpCell()
-        setUpUI(img: "", pokeLbl: "", iD: "")
+        setUpUI(img: "", pokeLbl: "", iD: "", damage: "")
     }
     
     required init?(coder: NSCoder) {
@@ -89,39 +90,63 @@ class PokemonListCollectionCell: UICollectionViewCell {
     }
     
     
+    // set up layout cell
     func setUpCell() {
-        let componentsInsdeStackView: [UIView] = [pokemonImageView, pokemonNamelabel]
-        
         contentView.addSubview(viewContainer)
         viewContainer.addSubview(verticalStackView)
-    
-        for items in componentsInsdeStackView {
-            verticalStackView.addArrangedSubview(items)
-        }
+        viewContainer.addSubview(horizontalStackView)
+        verticalStackView.addArrangedSubview(pokemonImageView)
+        verticalStackView.addArrangedSubview(pokemonNamelabel)
+        horizontalStackView.addArrangedSubview(pokemonIconDamage)
+        horizontalStackView.addArrangedSubview(pokemonDamage)
+        
+//        let componentsInsideContainer: [UIView] = [verticalStackView, horizontalStackView]
+//        let componentsInsdeStackView: [UIView] = [pokemonImageView, pokemonNamelabel, pokemonIconDamage, pokemonDamage]
+//        
+//        contentView.addSubview(viewContainer)
+//        
+//        for containerVw in componentsInsideContainer {
+//            viewContainer.addSubview(containerVw)
+//        }
+//    
+//        for items in componentsInsdeStackView {
+//            verticalStackView.addArrangedSubview(items)
+//            horizontalStackView.addArrangedSubview(items)
+//            
+//        }
         
         
         //constraints
         NSLayoutConstraint.activate([
             
-            viewContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
-            viewContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
-            viewContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
-            viewContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
+            viewContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
+            viewContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            viewContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            viewContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
             
-            verticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            verticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),
-            verticalStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -4),
-            verticalStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            verticalStackView.topAnchor.constraint(equalTo: viewContainer.topAnchor, constant: 10),
+            verticalStackView.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor, constant: 2),
+            verticalStackView.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -2),
+            
+            horizontalStackView.topAnchor.constraint(equalTo: verticalStackView.bottomAnchor, constant: 15),
+            horizontalStackView.leadingAnchor.constraint(equalTo: viewContainer.leadingAnchor, constant: 3),
+            horizontalStackView.trailingAnchor.constraint(equalTo: viewContainer.trailingAnchor, constant: -5),
+            horizontalStackView.bottomAnchor.constraint(equalTo: viewContainer.bottomAnchor, constant: -5),
+            
+            pokemonIconDamage.widthAnchor.constraint(equalToConstant: 10),
+            pokemonIconDamage.heightAnchor.constraint(equalToConstant: 10),
             
             pokemonImageView.widthAnchor.constraint(equalToConstant: 150),
             pokemonImageView.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
     
-    func setUpUI(img: String, pokeLbl: String,iD: String) {
+    // set up UI
+    func setUpUI(img: String, pokeLbl: String,iD: String, damage: String) {
         guard let url = URL(string: img) else {return}
         
         pokemonNamelabel.text = pokeLbl
+        pokemonDamage.text = damage
         
         if !img.isEmpty{
             pokemonImageView.sd_setImage(with: url )

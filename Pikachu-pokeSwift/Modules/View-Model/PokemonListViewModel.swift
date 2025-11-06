@@ -25,16 +25,13 @@ protocol PokemonListViewModelInputs {
 }
 
 protocol PokemonListViewModelOutputs {
-    var update: Observable<Bool> {get}
 //    var showError: Observable<Error> {get}
-//    var showLoadMore: Observable<Bool> {get}
     var pokemonList: Observable<PokeResponType> {get}
 }
 
 class PokemonListViewModel: BaseViewModel {
     var updateVariable = BehaviorRelay<Bool>(value:false)
 //    var showError = BehaviorRelay<Bool>(value: false)
-//    var showLoadMore = BehaviorRelay<Bool>(value: false)
     var pokemonListData = BehaviorRelay<[PokemonListDataResults]>(value: [])
     var pokeResultData = BehaviorRelay<PokeResponType>(value: .success)
     
@@ -71,7 +68,6 @@ class PokemonListViewModel: BaseViewModel {
                 guard let self = self else {return}
                 
                 if let data = successData {
-                    print("sukses", successData)
                     self.pokemonListData.accept(data)
                 }
             }
@@ -84,11 +80,7 @@ class PokemonListViewModel: BaseViewModel {
     var pokemonList: Observable <PokeResponType> {
         return pokeResultData.asObservable()
     }
-    
-    var update: RxSwift.Observable<Bool> {
-        return updateVariable.asObservable()
-    }
-    
+        
     var successShowingPokemonListData: Observable<[PokemonListDataResults]> {
         return pokemonListData.asObservable()
     }

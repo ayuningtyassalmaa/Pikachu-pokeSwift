@@ -7,14 +7,17 @@
 
 import UIKit
 import RxSwift
+import SDWebImage
 
 
 class PokemonDetailsViewController: UIViewController {
     
-    
+    // Ui components
     @IBOutlet weak var imgPoke: UIImageView!
+    @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var tableView: UITableView!
     
+    // properties
     var viewModel: PokemonDetailsViewModel!
     var coordinator: PokemonDetailVCCoordinator!
     var pokemonDetailsData: PokemonDetailDataResults?
@@ -25,18 +28,19 @@ class PokemonDetailsViewController: UIViewController {
         super.viewDidLoad()
         setupTableCell()
         bindModel()
-        
-        print("viewmodel calling API..")
         viewModel.callApiDetailsPokemon(id: viewModel.pokemonID ?? "xy1-1" )
     }
     
+    // set up table view cell
     func setupTableCell() {
         tableView.register(UINib(nibName: "PokemonDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: PokemonDetailsTableViewCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorStyle = .none
     }
     
+    // binding vc to view model
     func bindModel() {
         viewModel.pokemonDetailsData
             .asObservable()
@@ -55,6 +59,19 @@ class PokemonDetailsViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
+    
+    // setup gradient
+    func setupImage() {
+        let gradientBackground = CAGradientLayer()
+        gradientBackground.colors = [
+            UIColor.systemBackground.cgColor,
+            UIColor.systemOrange.cgColor
+        ]
+        gradientBackground.startPoint = CGPoint(x: 0, y: 0)
+        gradientBackground.endPoint = CGPoint(x: 1, y: 1)
+        gradientBackground.frame = imgPoke.bounds
+        self.imgPoke.layer.insertSublayer(gradientBackground, at: 0)
+    }
 
 }; extension PokemonDetailsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,13 +86,9 @@ class PokemonDetailsViewController: UIViewController {
             { return
             UITableViewCell()
         }
-        
-        
-        cell.setupUI(img: pokeDetailsData?.set?.images?.symbol ?? "", pokeName: pokeDetailsData?.name ?? "", typePoke: pokeDetailsData?.supertype ?? "", ability: pokeDetailsData?.attacks?[0].name ?? "", weakness: pokeDetailsData?.weaknesses?[0].type ?? "", logo: pokeDetailsData?.set?.images?.logo ?? "")
+
+        cell.setupUI(img: pokeDetailsData?.set?.images?.symbol ?? "", pokeName: pokeDetailsData?.name ?? "", typePoke: pokeDetailsData?.supertype ?? "", ability: pokeDetailsData?.attacks?[0].name ?? "", weakness: pokeDetailsData?.weaknesses?[0].type ?? "", logo: pokeDetailsData?.set?.images?.logo ?? "", rules: pokeDetailsData?.rules?[0] ?? "")
         
         return cell
     }
-    
-    
-    
 }

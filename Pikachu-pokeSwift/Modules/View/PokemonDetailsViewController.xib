@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PokemonDetailsViewController" customModule="Pikachu_pokeSwift" customModuleProvider="target">
             <connections>
+                <outlet property="gradientView" destination="rCy-3R-Drg" id="tmr-F5-RX6"/>
                 <outlet property="imgPoke" destination="33j-Of-aPu" id="gOd-QL-Lg3"/>
                 <outlet property="tableView" destination="PAg-ol-9Em" id="sjA-t5-kGa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -21,27 +22,39 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="33j-Of-aPu">
-                    <rect key="frame" x="0.0" y="-1.6666666666666572" width="393" height="300.66666666666663"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rCy-3R-Drg">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="285"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.up" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="33j-Of-aPu">
+                            <rect key="frame" x="20" y="68.333333333333314" width="351" height="173"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="171.33000000000001" id="MwX-ah-O3F"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.91380953495222506" green="0.91591566801071167" blue="0.86407065546523565" alpha="0.74372874149659862" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="299" id="oV9-Vi-Txc"/>
+                        <constraint firstAttribute="bottom" secondItem="33j-Of-aPu" secondAttribute="bottom" constant="43.670000000000002" id="CwE-cQ-n03"/>
+                        <constraint firstAttribute="trailing" secondItem="33j-Of-aPu" secondAttribute="trailing" constant="22" id="GZt-Gb-P4h"/>
+                        <constraint firstItem="33j-Of-aPu" firstAttribute="top" secondItem="rCy-3R-Drg" secondAttribute="top" constant="70" id="Ild-Vd-U0h"/>
+                        <constraint firstItem="33j-Of-aPu" firstAttribute="leading" secondItem="rCy-3R-Drg" secondAttribute="leading" constant="20" id="Lfg-V7-vgA"/>
                     </constraints>
-                </imageView>
+                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PAg-ol-9Em">
-                    <rect key="frame" x="0.0" y="299" width="393" height="553"/>
+                    <rect key="frame" x="0.0" y="285" width="393" height="567"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="PAg-ol-9Em" firstAttribute="top" secondItem="33j-Of-aPu" secondAttribute="bottom" id="9m5-0h-5gU"/>
-                <constraint firstItem="33j-Of-aPu" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Nmp-6F-uNX"/>
+                <constraint firstItem="rCy-3R-Drg" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="1Dc-Fb-x1d"/>
                 <constraint firstAttribute="bottom" secondItem="PAg-ol-9Em" secondAttribute="bottom" id="YKv-1O-gBy"/>
-                <constraint firstItem="33j-Of-aPu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gKC-s6-HSs"/>
+                <constraint firstItem="rCy-3R-Drg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="iJu-ZI-YxV"/>
+                <constraint firstItem="rCy-3R-Drg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="kam-7c-6dA"/>
                 <constraint firstItem="PAg-ol-9Em" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rnK-kl-dw8"/>
-                <constraint firstItem="33j-Of-aPu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="rv6-pW-Xnp"/>
                 <constraint firstAttribute="trailing" secondItem="PAg-ol-9Em" secondAttribute="trailing" id="tr4-PP-yNA"/>
+                <constraint firstItem="PAg-ol-9Em" firstAttribute="top" secondItem="rCy-3R-Drg" secondAttribute="bottom" id="vKw-ac-vpl"/>
             </constraints>
             <point key="canvasLocation" x="-25.190839694656489" y="20.422535211267608"/>
         </view>
