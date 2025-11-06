@@ -8,8 +8,6 @@
 		<false/>
 		<key>UIApplicationPreferredDefaultSceneSessionRole</key>
 		<string>UIWindowSceneSessionRoleApplication</string>
-		<key>App Transport Security Settings</key>
-		<dict/>
 		<key>Allow Arbitrary Loads</key>
 		<true/>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -11,7 +11,7 @@ import RxSwift
 
 class PokemonListViewController: UIViewController {
     
-    var coordinator: PokemonListCoordinator!
+    var coordinator: PokemonDetailVCCoordinator!
     var viewModel: PokemonListViewModel = PokemonListViewModel()
     var model: PokemonListData?
     let disposeBag = DisposeBag()
@@ -71,8 +71,10 @@ class PokemonListViewController: UIViewController {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedPokemon = viewModel.pokemonListData.value[indexPath.row]
-        let detailVC = PokemonDetailsViewController()
-        navigationController?.pushViewController(detailVC, animated: true)
+        
+        let detailsVC = PokemonDetailVCCoordinator.createPokemonPokemonDetailViewController(pokemonID: selectedPokemon.id ?? "")
+        detailsVC.hidesBottomBarWhenPushed = true
+        present(detailsVC, animated: true)
     }
 }
 

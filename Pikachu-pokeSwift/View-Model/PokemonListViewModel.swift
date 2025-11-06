@@ -79,7 +79,6 @@ class PokemonListViewModel: BaseViewModel {
         
     }
     
-    
 }; extension PokemonListViewModel: PokemonListViewModelOutputs {
  
     var pokemonList: Observable <PokeResponType> {

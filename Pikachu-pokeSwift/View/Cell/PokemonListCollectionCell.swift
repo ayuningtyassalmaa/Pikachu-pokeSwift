@@ -11,6 +11,18 @@ import SDWebImage
 class PokemonListCollectionCell: UICollectionViewCell {
     
     static let identifier = "PokemonListCollectionCell"
+    
+    private let viewContainer: UIView = {
+       let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = false
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowColor = UIColor.lightGray.cgColor
+        return view
+    }()
+    
     private let verticalStackView: UIStackView = {
         let stckvw = UIStackView()
         stckvw.axis = .vertical
@@ -79,8 +91,10 @@ class PokemonListCollectionCell: UICollectionViewCell {
     
     func setUpCell() {
         let componentsInsdeStackView: [UIView] = [pokemonImageView, pokemonNamelabel]
-        contentView.addSubview(verticalStackView)
         
+        contentView.addSubview(viewContainer)
+        viewContainer.addSubview(verticalStackView)
+    
         for items in componentsInsdeStackView {
             verticalStackView.addArrangedSubview(items)
         }
@@ -88,6 +102,11 @@ class PokemonListCollectionCell: UICollectionViewCell {
         
         //constraints
         NSLayoutConstraint.activate([
+            
+            viewContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
+            viewContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
+            viewContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
+            viewContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
             
             verticalStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             verticalStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 4),

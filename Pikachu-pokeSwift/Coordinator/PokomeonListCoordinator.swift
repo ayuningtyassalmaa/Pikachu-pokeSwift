@@ -6,12 +6,15 @@
 //
 
 import Foundation
+import UIKit
 
-struct PokemonListCoordinator {
-    static func createPokemonListViewController() -> PokemonListViewController {
-        let controller = PokemonListViewController()
-        controller.viewModel = PokemonListViewModel()
-        controller.coordinator = PokemonListCoordinator()
+struct PokemonDetailVCCoordinator {
+    static func createPokemonPokemonDetailViewController(pokemonID: String = "xy1-1") -> PokemonDetailsViewController {
+        let controller = PokemonDetailsViewController(nibName: "PokemonDetailsViewController", bundle: nil)
+//        let nav = UINavigationController(rootViewController: controller)
+       
+        controller.viewModel = PokemonDetailsViewModel.init(pokemonID: pokemonID)
+        controller.coordinator = PokemonDetailVCCoordinator()
         return controller
     }
 }
